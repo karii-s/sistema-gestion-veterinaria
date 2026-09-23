@@ -1,0 +1,79 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Eliminar Mascota</title>
+
+    <link rel="stylesheet" href="{% static 'veterinaria/estilos.css' %}">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="navbar-container">
+
+            <a class="navbar-brand" href="{% url 'lista_mascotas' %}">
+                🐾 Gestión Veterinaria
+            </a>
+
+            <ul class="navbar-links">
+                <li>
+                    <a href="{% url 'lista_mascotas' %}">
+                        Mascotas
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{% url 'lista_propietarios' %}">
+                        Propietarios
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{% url 'agregar_mascota' %}">
+                        Registrar mascota
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+
+
+    <h1>🐾 Eliminar Mascota</h1>
+
+    <div class="container">
+
+        <h2>Confirmar eliminación</h2>
+
+        <hr>
+
+        <p>
+            ¿Estás seguro de que deseas eliminar a
+            <strong>{{ mascota.nombre }}</strong>?
+        </p>
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            <button type="submit">
+                Eliminar mascota
+            </button>
+
+        </form>
+
+        <br>
+
+        <a class="boton" href="{% url 'lista_mascotas' %}">
+            Cancelar
+        </a>
+
+    </div>
+
+</body>
+</html>

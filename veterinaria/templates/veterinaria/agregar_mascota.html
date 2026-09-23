@@ -1,0 +1,175 @@
+{% load static %}
+{% load widget_tweaks %}
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Registrar Mascota</title>
+
+    <link rel="stylesheet" href="{% static 'veterinaria/estilos.css' %}">
+</head>
+
+<body>
+
+    <!-- Barra de navegación -->
+    <nav class="navbar">
+
+        <div class="navbar-container">
+
+            <a class="navbar-brand" href="{% url 'lista_mascotas' %}">
+                🐾 Gestión Veterinaria
+            </a>
+
+            <ul class="navbar-links">
+
+                <li>
+                    <a href="{% url 'lista_mascotas' %}">
+                        Mascotas
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{% url 'lista_propietarios' %}">
+                        Propietarios
+                    </a>
+                </li>
+
+                <li>
+                    <a class="nav-principal" href="{% url 'agregar_mascota' %}">
+                        Registrar mascota
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+    </nav>
+
+
+    <!-- Título principal -->
+    <h1>🐾 Registrar Nueva Mascota</h1>
+
+
+    <!-- Contenedor principal -->
+    <div class="container">
+
+        <h2>Datos de la Mascota</h2>
+
+        <hr>
+
+
+        <!-- Formulario -->
+        <form method="POST">
+
+            {% csrf_token %}
+
+            {{ form.non_field_errors }}
+
+
+            <!-- Nombre -->
+            <p>
+
+                <label for="{{ form.nombre.id_for_label }}">
+                    Nombre de la mascota
+                </label>
+
+                {% render_field form.nombre class="campo-formulario" placeholder="Ej: Luna" %}
+
+                {% for error in form.nombre.errors %}
+                    <small class="error">
+                        {{ error }}
+                    </small>
+                {% endfor %}
+
+            </p>
+
+
+            <!-- Especie -->
+            <p>
+
+                <label for="{{ form.especie.id_for_label }}">
+                    Especie
+                </label>
+
+                {% render_field form.especie class="campo-formulario" placeholder="Ej: Perro, Gato, Ave" %}
+
+                {% for error in form.especie.errors %}
+                    <small class="error">
+                        {{ error }}
+                    </small>
+                {% endfor %}
+
+            </p>
+
+
+            <!-- Raza -->
+            <p>
+
+                <label for="{{ form.raza.id_for_label }}">
+                    Raza
+                </label>
+
+                {% render_field form.raza class="campo-formulario" placeholder="Ej: Labrador" %}
+
+                {% for error in form.raza.errors %}
+                    <small class="error">
+                        {{ error }}
+                    </small>
+                {% endfor %}
+
+            </p>
+
+
+            <!-- Edad -->
+            <p>
+
+                <label for="{{ form.edad.id_for_label }}">
+                    Edad
+                </label>
+
+                {% render_field form.edad class="campo-formulario" min="0" max="50" placeholder="Ej: 4" %}
+
+                {% for error in form.edad.errors %}
+                    <small class="error">
+                        {{ error }}
+                    </small>
+                {% endfor %}
+
+            </p>
+
+
+            <!-- Propietario -->
+            <p>
+
+                <label for="{{ form.propietario.id_for_label }}">
+                    Propietario
+                </label>
+
+                {% render_field form.propietario class="campo-formulario" %}
+
+                {% for error in form.propietario.errors %}
+                    <small class="error">
+                        {{ error }}
+                    </small>
+                {% endfor %}
+
+            </p>
+
+
+            <!-- Botón -->
+            <button type="submit">
+                Guardar Mascota
+            </button>
+
+        </form>
+
+    </div>
+
+</body>
+
+</html>

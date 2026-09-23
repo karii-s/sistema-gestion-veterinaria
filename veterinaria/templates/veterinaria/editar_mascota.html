@@ -1,0 +1,70 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Editar Mascota</title>
+
+    <link rel="stylesheet" href="{% static 'veterinaria/estilos.css' %}">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="navbar-container">
+
+            <a class="navbar-brand" href="{% url 'lista_mascotas' %}">
+                🐾 Gestión Veterinaria
+            </a>
+
+            <ul class="navbar-links">
+                <li>
+                    <a href="{% url 'lista_mascotas' %}">
+                        Mascotas
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{% url 'lista_propietarios' %}">
+                        Propietarios
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{% url 'agregar_mascota' %}">
+                        Registrar mascota
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+
+
+    <h1>🐾 Editar Mascota</h1>
+
+    <div class="container">
+
+        <h2>Modificar datos de {{ mascota.nombre }}</h2>
+
+        <hr>
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <button type="submit">
+                Guardar cambios
+            </button>
+
+        </form>
+
+    </div>
+
+</body>
+</html>
