@@ -3,77 +3,197 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Gestión Veterinaria</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f8ff;
+            margin: 0;
+            padding: 40px;
+            color: #1f2937;
+        }
+
+        .contenedor {
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        h1 {
+            color: #1565c0;
+            margin-bottom: 10px;
+        }
+
+        .subtitulo {
+            color: #64748b;
+            margin-bottom: 25px;
+        }
+
+        .menu {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+        }
+
+        .boton {
+            display: inline-block;
+            padding: 10px 16px;
+            background-color: #1976d2;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+        }
+
+        .boton:hover {
+            background-color: #0d47a1;
+        }
+
+        .tarjeta {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th {
+            background-color: #1976d2;
+            color: white;
+            padding: 12px;
+            text-align: left;
+        }
+
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        tr:hover {
+            background-color: #f8fbff;
+        }
+
+        .accion {
+            color: #1976d2;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .eliminar {
+            color: #d32f2f;
+        }
+
+        .sin-datos {
+            padding: 20px;
+            text-align: center;
+            color: #64748b;
+        }
+    </style>
 </head>
 
 <body>
 
-    <h1>Lista de Mascotas</h1>
+<div class="contenedor">
 
-    <a href="{% url 'agregar_mascota' %}">
-        Agregar mascota
-    </a>
+    <h1>🐾 Sistema de Gestión Veterinaria</h1>
 
-    <br><br>
+    <p class="subtitulo">
+        Administración de mascotas y propietarios
+    </p>
 
-    <a href="{% url 'lista_propietarios' %}">
-        Ver propietarios
-    </a>
+    <div class="menu">
+        <a class="boton" href="{% url 'agregar_mascota' %}">
+            + Agregar mascota
+        </a>
 
-    <br><br>
+        <a class="boton" href="{% url 'lista_propietarios' %}">
+            Ver propietarios
+        </a>
 
-    <a href="{% url 'agregar_propietario' %}">
-        Agregar propietario
-    </a>
+        <a class="boton" href="{% url 'agregar_propietario' %}">
+            + Agregar propietario
+        </a>
+    </div>
 
-    <hr>
+    <div class="tarjeta">
 
-    {% if mascotas %}
-        <table border="1">
-            <thead>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Especie</th>
-                    <th>Raza</th>
-                    <th>Edad</th>
-                    <th>Propietario</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
+        <h2>Lista de Mascotas</h2>
 
-            <tbody>
-                {% for mascota in mascotas %}
+        {% if mascotas %}
+
+            <table>
+                <thead>
                     <tr>
-                        <td>{{ mascota.nombre }}</td>
-                        <td>{{ mascota.especie }}</td>
-                        <td>{{ mascota.raza }}</td>
-                        <td>{{ mascota.edad }}</td>
-                        <td>
-                            {% if mascota.propietario %}
-                                {{ mascota.propietario.nombre }}
-                            {% else %}
-                                Sin propietario
-                            {% endif %}
-                        </td>
-                        <td>
-                            <a href="{% url 'editar_mascota' mascota.id %}">
-                                Editar
-                            </a>
-
-                            |
-
-                            <a href="{% url 'eliminar_mascota' mascota.id %}">
-                                Eliminar
-                            </a>
-                        </td>
+                        <th>Nombre</th>
+                        <th>Especie</th>
+                        <th>Raza</th>
+                        <th>Edad</th>
+                        <th>Propietario</th>
+                        <th>Acciones</th>
                     </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+                </thead>
 
-    {% else %}
-        <p>No hay mascotas registradas.</p>
-    {% endif %}
+                <tbody>
+
+                    {% for mascota in mascotas %}
+
+                        <tr>
+
+                            <td>{{ mascota.nombre }}</td>
+
+                            <td>{{ mascota.especie }}</td>
+
+                            <td>{{ mascota.raza }}</td>
+
+                            <td>{{ mascota.edad }}</td>
+
+                            <td>
+                                {% if mascota.propietario %}
+                                    {{ mascota.propietario.nombre }}
+                                {% else %}
+                                    Sin propietario
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                <a class="accion"
+                                   href="{% url 'editar_mascota' mascota.id %}">
+                                    Editar
+                                </a>
+
+                                |
+
+                                <a class="accion eliminar"
+                                   href="{% url 'eliminar_mascota' mascota.id %}">
+                                    Eliminar
+                                </a>
+                            </td>
+
+                        </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        {% else %}
+
+            <p class="sin-datos">
+                No hay mascotas registradas.
+            </p>
+
+        {% endif %}
+
+    </div>
+
+</div>
 
 </body>
 </html>
