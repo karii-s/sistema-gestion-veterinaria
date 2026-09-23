@@ -79,7 +79,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'mysite.wsgi.applMIDDication'
+WSGI_APPLICATION = 'mysite.wsgi.application'
 
 
 # Database

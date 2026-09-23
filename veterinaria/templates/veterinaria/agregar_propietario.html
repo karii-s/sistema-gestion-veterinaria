@@ -1,0 +1,24 @@
+{% load widget_tweaks %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Agregar propietario</title>
+</head>
+<body>
+
+    <h1>Agregar propietario</h1>
+
+    <form method="post">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit">Guardar propietario</button>
+    </form>
+
+    <a href="{% url 'lista_propietarios' %}">Volver a propietarios</a>
+
+</body>
+</html>

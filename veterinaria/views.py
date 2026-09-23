@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Mascota, Propietario
-from .forms import MascotaForm
+from .forms import MascotaForm, PropietarioForm
 
 
 def lista_mascotas(request):
@@ -31,6 +31,21 @@ def lista_propietarios(request):
 
     return render(request, "veterinaria/lista_propietarios.html", {
         "propietarios": propietarios
+    })
+
+
+def agregar_propietario(request):
+    if request.method == "POST":
+        form = PropietarioForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            return redirect("lista_propietarios")
+    else:
+        form = PropietarioForm()
+
+    return render(request, "veterinaria/agregar_propietario.html", {
+        "form": form
     })
 
 
