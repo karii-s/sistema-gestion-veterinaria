@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -44,6 +45,9 @@
             color: white;
             text-decoration: none;
             border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
         }
 
         .boton:hover {
@@ -107,7 +111,16 @@
         Administración de mascotas y propietarios
     </p>
 
+    <!-- Cerrar sesión -->
+    <form method="post" action="{% url 'logout' %}" style="margin-bottom: 15px;">
+        {% csrf_token %}
+        <button class="boton" type="submit">
+            Cerrar sesión
+        </button>
+    </form>
+
     <div class="menu">
+
         <a class="boton" href="{% url 'agregar_mascota' %}">
             + Agregar mascota
         </a>
@@ -119,6 +132,7 @@
         <a class="boton" href="{% url 'agregar_propietario' %}">
             + Agregar propietario
         </a>
+
     </div>
 
     <div class="tarjeta">
@@ -162,6 +176,7 @@
                             </td>
 
                             <td>
+
                                 <a class="accion"
                                    href="{% url 'editar_mascota' mascota.id %}">
                                     Editar
@@ -173,6 +188,7 @@
                                    href="{% url 'eliminar_mascota' mascota.id %}">
                                     Eliminar
                                 </a>
+
                             </td>
 
                         </tr>
@@ -197,3 +213,4 @@
 
 </body>
 </html>
+```

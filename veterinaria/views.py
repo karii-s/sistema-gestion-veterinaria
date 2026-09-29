@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 from .models import Mascota, Propietario
 from .forms import MascotaForm, PropietarioForm
 
 
+@login_required
 def lista_mascotas(request):
     mascotas = Mascota.objects.all()
 
@@ -11,6 +13,7 @@ def lista_mascotas(request):
     })
 
 
+@login_required
 def agregar_mascota(request):
     if request.method == "POST":
         form = MascotaForm(request.POST)
@@ -26,6 +29,7 @@ def agregar_mascota(request):
     })
 
 
+@login_required
 def lista_propietarios(request):
     propietarios = Propietario.objects.all()
 
@@ -34,6 +38,7 @@ def lista_propietarios(request):
     })
 
 
+@login_required
 def agregar_propietario(request):
     if request.method == "POST":
         form = PropietarioForm(request.POST)
@@ -49,6 +54,7 @@ def agregar_propietario(request):
     })
 
 
+@login_required
 def editar_mascota(request, id):
     mascota = Mascota.objects.get(id=id)
 
@@ -67,6 +73,7 @@ def editar_mascota(request, id):
     })
 
 
+@login_required
 def eliminar_mascota(request, id):
     mascota = Mascota.objects.get(id=id)
 
